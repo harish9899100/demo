@@ -14,7 +14,7 @@ jobs:
       - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.new-branch }}
 
       - name: Deploy preview to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

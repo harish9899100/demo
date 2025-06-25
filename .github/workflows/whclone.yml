@@ -14,12 +14,14 @@ jobs:
       - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.new-branch }}
+          ref: ${{ github.head_ref }}
+
 
       - name: Deploy preview to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.SECOND_SECRET }}
+          github_token: ${{ secrets.SECOND_TOKEN }}
+
           publish_dir: ./demo
           publish_branch: gh-pages-preview
           user_name: github-actions

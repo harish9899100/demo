@@ -1,0 +1,26 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled]
+
+jobs:
+  deploy-preview:
+    if: contains(github.event.pull_request.labels.*.name, 'preview')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Deploy preview to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.SECOND_SECRET }}
+          publish_dir: ./demo
+          publish_branch: gh-pages-preview
+          user_name: github-actions
+          user_email: github-actions@github.com
+          force_orphan: true
